@@ -6,7 +6,10 @@ require("dotenv").config();
 const contactRoutes = require("./routes/contact");
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://zakaria-elbidali.vercel.app',
+}));
 app.use(express.json());
 
 app.use("/api/contact", contactRoutes);
