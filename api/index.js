@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-const contactRoutes = require("./routes/contact");
+const contactRoutes = require("../routes/contact");
 
 const app = express();
 
