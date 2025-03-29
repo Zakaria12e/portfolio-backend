@@ -40,6 +40,25 @@ router.get("/", async (req, res) => {
       res.status(500).json({ error: "Failed to delete message" });
     }
   });
+
+  router.patch("/:id/read", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedMessage = await Message.findByIdAndUpdate(
+        id,
+        { read: true },
+        { new: true }
+      );
+  
+      if (!updatedMessage) {
+        return res.status(404).json({ error: "Message not found" });
+      }
+  
+      res.status(200).json(updatedMessage);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update message" });
+    }
+  });
   
 
 module.exports = router;
