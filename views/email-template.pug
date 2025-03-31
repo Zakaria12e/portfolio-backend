@@ -2,65 +2,32 @@ doctype html
 html
   head
     meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    style.
-      .email-container {
-        max-width: 600px;
-        margin: 0 auto;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      }
-      .header {
-        background: #5865F2;
-        color: white;
-        padding: 24px;
-        border-radius: 8px 8px 0 0;
-      }
-      .content {
-        background: #ffffff;
-        padding: 24px;
-        border: 1px solid #e1e1e1;
-        border-radius: 0 0 8px 8px;
-      }
-      .field {
-        margin-bottom: 16px;
-      }
-      .label {
-        font-weight: 600;
-        color: #5865F2;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .value {
-        margin-top: 4px;
-        color: #374151;
-        background: #f9fafb;
-        padding: 12px;
-        border-radius: 6px;
-        border: 1px solid #e5e7eb;
-      }
-      .footer {
-        text-align: center;
-        color: #6b7280;
-        font-size: 12px;
-        margin-top: 24px;
-        padding-top: 24px;
-        border-top: 1px solid #e5e7eb;
-      }
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Portfolio Contact Form
+    link(rel="stylesheet", href="style.css")
 
   body
     .email-container
       .header
-        h2(style="margin:0;font-size:24px;") New Contact Message
+        .logo
+          .logo-icon Z
+          span(style="color: #ffffff; font-weight: 600;") Portfolio
+        h2 New Message Received
+      
       .content
-        .field
-          .label From
-          .value #{name} (#{email})
-        .field
-          .label Subject
-          .value #{subject}
-        .field
-          .label Message
-          .value(style="white-space: pre-wrap;") #{message}
+        .message-header
+          .sender-info
+            .sender-name #{name}
+            .sender-email #{email}
+        
+        .subject #{subject}
+        
+        .message-body #{message}
+        
         .footer
+          .tech-icons
+            .tech-icon JS
+            .tech-icon TS
+            .tech-icon R
+          p Creating digital experiences that matter
           p Sent from your portfolio contact form
