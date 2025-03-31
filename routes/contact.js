@@ -60,6 +60,7 @@ router.delete("/:id", async (req, res) => {
     if (!deletedMessage) {
       return res.status(404).json({ error: "Message not found" });
     }
+<<<<<<< HEAD
 
     res.status(200).json({ message: "Message deleted successfully" });
   } catch (error) {
@@ -85,5 +86,9 @@ router.patch("/:id/read", async (req, res) => {
     res.status(500).json({ error: "Failed to update message" });
   }
 });
+=======
+  });
+  
+>>>>>>> parent of 7c9f572 (add read router to update the status of the msg)
 
 module.exports = router;
