@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Message = require("../models/Message");
 const nodemailer = require("nodemailer");
+const pug = require("pug");
+const path = require("path");
 require('dotenv').config();
-
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -12,6 +13,10 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_APP_PASSWORD
   }
 });
+
+const emailTemplate = pug.compileFile(
+  path.join(__dirname, '..', 'views', 'email-template.pug')
+);
 
 router.post("/", async (req, res) => {
   try {
@@ -23,19 +28,16 @@ router.post("/", async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      replyTo: email, 
-      subject: subject,
-      text: `
-      Name: ${name}
-      Email: ${email}
-      Subject: ${subject}
-      Message: ${message}
-      `,
+      replyTo: email,
+      subject: `New Contact: ${subject}`,
+      html: emailTemplate({ name, email, subject, message }),
     };
+
     await transporter.sendMail(mailOptions);
 
     res.status(200).json({ message: "Message sent successfully!" });
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).json({ error: "Failed to send message." });
   }
 });
