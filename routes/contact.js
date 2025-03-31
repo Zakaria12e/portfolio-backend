@@ -1,22 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Message = require("../models/Message");
-const nodemailer = require("nodemailer");
-const pug = require("pug");
-const path = require("path");
-require('dotenv').config();
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD
-  }
-});
 
-const emailTemplate = pug.compileFile(
-  path.join(__dirname, '..', 'views', 'email-template.pug')
-);
 
 router.post("/", async (req, res) => {
   try {
@@ -24,16 +10,6 @@ router.post("/", async (req, res) => {
 
     const newMessage = new Message({ name, email, subject, message });
     await newMessage.save();
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      replyTo: email,
-      subject: `New Contact: ${subject}`,
-      html: emailTemplate({ name, email, subject, message }),
-    };
-
-    await transporter.sendMail(mailOptions);
 
     res.status(200).json({ message: "Message sent successfully!" });
   } catch (error) {
@@ -60,7 +36,6 @@ router.delete("/:id", async (req, res) => {
     if (!deletedMessage) {
       return res.status(404).json({ error: "Message not found" });
     }
-<<<<<<< HEAD
 
     res.status(200).json({ message: "Message deleted successfully" });
   } catch (error) {
@@ -86,9 +61,5 @@ router.patch("/:id/read", async (req, res) => {
     res.status(500).json({ error: "Failed to update message" });
   }
 });
-=======
-  });
-  
->>>>>>> parent of 7c9f572 (add read router to update the status of the msg)
 
 module.exports = router;
