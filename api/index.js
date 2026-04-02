@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -16,15 +15,6 @@ app.use("/contact", contactRoutes);
 
 const PORT = process.env.PORT || 8080;
 
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("MongoDB connected");
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => console.error("MongoDB connection failed:", err));
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
